@@ -5,8 +5,10 @@ import { deleteUserFailed, deleteUserStart, deleteUserSuccess, getUsersFailed, g
 export const loginUser = async(user,dispatch,navigate)=>{
     dispatch(loginStart());
     try{
-        const res = await axios.post("http://localhost:3000/api/user/loginUser",user)
-        console.log(res)
+        const res = await axios.post("http://localhost:3000/api/user/loginUser",user,{
+            withCredentials: true
+          })
+
         dispatch(loginSuccess(res.data))
         navigate("/");
     }
@@ -27,10 +29,10 @@ export const registerUser = async(user,dispatch,navigate)=>{
     }
 }
 
-export const getListUsers = async(accessToken, dispatch,axiosJWT)=>{
+export const getListUsers = async(accessToken, dispatch)=>{
     dispatch(getUsersStart());
     try{
-        const res = await axiosJWT.get("http://localhost:3000/api/user/getListUser",{
+        const res = await axios.get("http://localhost:3000/api/user/getListUser",{
             headers: {
                 token: `Bearer ${accessToken}`
             }
@@ -51,9 +53,11 @@ export const deleteUser =async(accessToken, dispatch,id,axiosJWT)=>{
                 token: `Bearer ${accessToken}`
             }
         })
+        const cookie = document.cookie
+        console.log('the',cookie)
         dispatch(deleteUserSuccess(res.data))
     }
     catch(err){
-        dispatch(deleteUserFailed(err.data))
+        dispatch(deleteUserFailed(err.response.data))
     }
 }

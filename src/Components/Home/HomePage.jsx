@@ -25,6 +25,7 @@ const HomePage = () => {
       const res = await axios.post("http://localhost:3000/api/user/refreshToken", {
         withCredentials: true
       })
+      console.log('res',res.data)
       return res.data
     }
     catch (err) {
@@ -37,12 +38,14 @@ const HomePage = () => {
     async (config) => {
       let date = new Date()
       const decodedToken = jwt_decode(user?.accessToken)
+      console.log( decodedToken.exp<(date.getTime() / 1000))
       if (decodedToken.exp < date.getTime() / 1000) {
         const data = await refreshToken()
         const refreshUser = {
           ...user,
           accessToken: data.accessToken
         };
+
         dispatch(loginSuccess(refreshUser))
         config.headers["token"] = `Bearer ${data.accessToken}`
       }
