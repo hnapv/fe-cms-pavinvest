@@ -3,7 +3,6 @@ import {useSelector} from "react-redux"
 import "./navbar.css";
 const NavBar = () => {
   const user = useSelector(( state) => state.auth.login.currentUser)
-  console.log(user)
   return (
     <nav className="navbar-container">
       <Link to="/" className="navbar-home"> Home </Link>
