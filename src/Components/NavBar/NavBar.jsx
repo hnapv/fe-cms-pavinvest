@@ -21,6 +21,7 @@ const handleLogout=()=>{
       {user? (
         <>
         <p className="navbar-user">Hi, <span> {user.fullname}  </span> </p>
+        <Link to="/customer" className="navbar-customer"> Customer </Link>
         <Link
          to="/logout" 
          className="navbar-logout"

@@ -64,6 +64,7 @@ const HomePage = () => {
   
   const handDelete = (id) => {
     deleteUser(user?.accessToken, dispatch, id, axiosJWT)
+    console.log('delete=>',deleteUser)
   }
 
   useEffect(() => {
@@ -73,6 +74,7 @@ const HomePage = () => {
     if (user?.accessToken) {
       getListUsers(user?.accessToken, dispatch, axiosJWT)
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
