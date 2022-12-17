@@ -53,8 +53,7 @@ export const deleteUser =async(accessToken, dispatch,id,axiosJWT)=>{
                 token: `Bearer ${accessToken}`
             }
         })
-        const cookie = document.cookie
-        console.log('the',cookie)
+        console.log('delte',  dispatch(deleteUserSuccess(res.data)))
         dispatch(deleteUserSuccess(res.data))
     }
     catch(err){
